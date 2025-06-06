@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NoteDao {
@@ -22,4 +23,7 @@ interface NoteDao {
 
     @Query("UPDATE notes SET isPinned = :isPinned WHERE id = :id")
     fun setPinned(id: Long, isPinned: Boolean)
+
+    @Query("SELECT * FROM notes ORDER BY isPinned DESC, id DESC")
+    fun getAllNotes(): Flow<List<Note>>
 }
