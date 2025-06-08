@@ -9,7 +9,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.extra_notes.presentation.notes.ui.NotesScreen
+import com.example.extra_notes.presentation.notes.ui.MainScreen
+import com.example.extra_notes.presentation.notes.ui.theme.Extra_NotesTheme
 import com.example.extra_notes.presentation.notes.viewmodel.NoteViewModel
 
 class MainActivity : ComponentActivity() {
@@ -23,15 +24,17 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val owner = LocalViewModelStoreOwner.current
+            Extra_NotesTheme {
+                val owner = LocalViewModelStoreOwner.current
 
-            owner?.let {
-                val viewModel: NoteViewModel = viewModel(
-                    it,
-                    "NoteViewModel",
-                    NoteViewModelFactory(LocalContext.current.applicationContext as Application)
-                )
-                NotesScreen(viewModel)
+                owner?.let {
+                    val viewModel: NoteViewModel = viewModel(
+                        it,
+                        "NoteViewModel",
+                        NoteViewModelFactory(LocalContext.current.applicationContext as Application)
+                    )
+                    MainScreen(viewModel)
+                }
             }
         }
     }
