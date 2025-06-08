@@ -13,7 +13,7 @@ import com.example.extra_notes.presentation.notes.ui.NotesScreen
 import com.example.extra_notes.presentation.notes.viewmodel.NoteViewModel
 
 class MainActivity : ComponentActivity() {
-    class UserViewModelFactory(val application: Application) :
+    class NoteViewModelFactory(val application: Application) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return NoteViewModel(application) as T
@@ -28,8 +28,8 @@ class MainActivity : ComponentActivity() {
             owner?.let {
                 val viewModel: NoteViewModel = viewModel(
                     it,
-                    "UserViewModel",
-                    UserViewModelFactory(LocalContext.current.applicationContext as Application)
+                    "NoteViewModel",
+                    NoteViewModelFactory(LocalContext.current.applicationContext as Application)
                 )
                 NotesScreen(viewModel)
             }
