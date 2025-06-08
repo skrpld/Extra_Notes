@@ -1,30 +1,30 @@
 package com.example.extra_notes.data.local.db
 
-import android.content.Context
+import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(
-    entities = [Note::class],
-    version = 1
-)
-abstract class AppDatabase : RoomDatabase() {
+@Database(entities = [(Note::class)], version = 1)
+abstract class NoteRoomDatabase: RoomDatabase() {
+
     abstract fun noteDao(): NoteDao
 
     companion object {
-        private var INSTANCE: AppDatabase? = null
+        private var INSTANCE: NoteRoomDatabase? = null
+        fun getInstance(context: Application): NoteRoomDatabase {
 
-        fun getDatabase(context: Context): AppDatabase {
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java,
-                    "notes_database"
-                ).build()
-
-                INSTANCE = instance
-                instance
+            synchronized(this) {
+                var instance = INSTANCE
+                if (instance == null) {
+                    instance = Room.databaseBuilder(
+                        context.applicationContext,
+                        NoteRoomDatabase::class.java,
+                        "notesdb"
+                    ).fallbackToDestructiveMigration().build()
+                    INSTANCE = instance
+                }
+                return instance
             }
         }
     }

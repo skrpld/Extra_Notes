@@ -19,10 +19,10 @@ interface NoteDao {
     fun delete(note: Note)
 
     @Query("SELECT * FROM notes WHERE id = :id")
-    fun getNoteById(id: Long): Note?
+    fun getNoteById(id: Int): Note?
 
     @Query("UPDATE notes SET isPinned = :isPinned WHERE id = :id")
-    fun setPinned(id: Long, isPinned: Boolean)
+    fun setPinned(id: Int, isPinned: Boolean)
 
     @Query("SELECT * FROM notes ORDER BY isPinned DESC, id DESC")
     fun getAllNotes(): Flow<List<Note>>
