@@ -3,14 +3,15 @@ package com.example.extra_notes.data.local.db
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NoteDao {
-    @Insert
-    fun insert(note: Note): Long
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(note: Note)
 
     @Update
     fun update(note: Note)
@@ -18,12 +19,12 @@ interface NoteDao {
     @Delete
     fun delete(note: Note)
 
-    @Query("SELECT * FROM notes WHERE id = :id")
+    @Query("SELECT * FROM notes_database WHERE id = :id")
     fun getNoteById(id: Int): Note?
 
-    @Query("UPDATE notes SET isPinned = :isPinned WHERE id = :id")
+    @Query("UPDATE notes_database SET isPinned = :isPinned WHERE id = :id")
     fun setPinned(id: Int, isPinned: Boolean)
 
-    @Query("SELECT * FROM notes ORDER BY isPinned DESC, id DESC")
+    @Query("SELECT * FROM notes_database ORDER BY isPinned DESC, id DESC")
     fun getAllNotes(): Flow<List<Note>>
 }

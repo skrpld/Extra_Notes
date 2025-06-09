@@ -8,19 +8,20 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.extra_notes.presentation.notes.viewmodel.NoteViewModel
+
 @Composable
 fun NotesList(noteVM: NoteViewModel = viewModel()) {
-    val noteListState by noteVM.noteList.collectAsState()
+    val noteList by noteVM.noteList.collectAsStateWithLifecycle()
 
-    if (noteListState.isEmpty()) {
+    if (noteList.isEmpty()) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -35,7 +36,7 @@ fun NotesList(noteVM: NoteViewModel = viewModel()) {
         }
     } else {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(noteListState) { note ->
+            items(noteList) { note ->
                 NoteItem(note = note)
             }
         }

@@ -10,6 +10,10 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -18,6 +22,13 @@ import com.example.extra_notes.presentation.notes.viewmodel.NoteViewModel
 
 @Composable
 fun MainScreen(noteVM: NoteViewModel = viewModel()) {
+    var showDialog by remember { mutableStateOf(false) }
+
+    NoteEditorDialog(
+        showDialog = showDialog,
+        onDismiss = { showDialog = false }
+    )
+
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
@@ -25,11 +36,11 @@ fun MainScreen(noteVM: NoteViewModel = viewModel()) {
                 .systemBarsPadding()
         ) {
             SearchBox()
-            NotesList(noteVM)
+            NotesList()
         }
 
         FloatingActionButton(
-            onClick = { /* Действие при клике */ },
+            onClick = { showDialog = true },
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(16.dp)
