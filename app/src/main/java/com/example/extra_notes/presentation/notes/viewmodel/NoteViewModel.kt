@@ -1,6 +1,6 @@
 package com.example.extra_notes.presentation.notes.viewmodel
 
-import android.app.Application // Этот импорт понадобится, если вы вернетесь к AndroidViewModel
+import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.extra_notes.data.local.db.Note
@@ -9,8 +9,8 @@ import com.example.extra_notes.data.repository.NoteRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.launchIn // Для сбора данных из Flow репозитория
-import kotlinx.coroutines.flow.onEach // Для сбора данных из Flow репозитория
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class NoteViewModel(application: Application) : AndroidViewModel(application) {

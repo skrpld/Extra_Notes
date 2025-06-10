@@ -1,6 +1,5 @@
 package com.example.extra_notes.data.repository
 
-import androidx.lifecycle.LiveData
 import com.example.extra_notes.data.local.db.Note
 import com.example.extra_notes.data.local.db.NoteDao
 import kotlinx.coroutines.CoroutineScope
