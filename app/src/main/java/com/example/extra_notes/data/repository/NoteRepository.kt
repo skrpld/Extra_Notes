@@ -31,6 +31,4 @@ class NoteRepository(
     fun getNoteById(id: Int): Note? = noteDao.getNoteById(id)
 
     fun getNotes(): Flow<List<Note>> = noteDao.getAllNotes()
-
-    fun setPinned(id: Int, isPinned: Boolean) = noteDao.setPinned(id, isPinned)
 }

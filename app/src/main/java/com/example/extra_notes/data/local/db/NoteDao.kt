@@ -22,9 +22,6 @@ interface NoteDao {
     @Query("SELECT * FROM notes_database WHERE id = :id")
     fun getNoteById(id: Int): Note?
 
-    @Query("UPDATE notes_database SET isPinned = :isPinned WHERE id = :id")
-    fun setPinned(id: Int, isPinned: Boolean)
-
     @Query("SELECT * FROM notes_database ORDER BY isPinned DESC, id DESC")
     fun getAllNotes(): Flow<List<Note>>
 }
