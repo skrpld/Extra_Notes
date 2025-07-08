@@ -20,7 +20,7 @@ interface NoteDao {
     fun delete(note: Note)
 
     @Query("SELECT * FROM notes_database WHERE id = :id")
-    fun getNoteById(id: Int): Note?
+    fun getNoteById(id: Int): Flow<Note?>
 
     @Query("SELECT * FROM notes_database ORDER BY isPinned DESC, id DESC")
     fun getAllNotes(): Flow<List<Note>>

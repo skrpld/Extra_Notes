@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.extra_notes.data.local.db.Note
 import com.example.extra_notes.data.local.db.NoteRoomDatabase
 import com.example.extra_notes.data.repository.NoteRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -49,11 +50,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun getNoteById(noteId: Int) {
-        viewModelScope.launch {
-            // Логика получения одной заметки, если нужно
-            // val note = repository.getNoteById(noteId)
-            // _selectedNote.value = note // Если у вас есть StateFlow для выбранной заметки
-        }
+    fun getNoteById(id: Int): Flow<Note?> {
+        return repository.getNoteById(id)
     }
 }

@@ -28,7 +28,9 @@ class NoteRepository(
         }
     }
 
-    fun getNoteById(id: Int): Note? = noteDao.getNoteById(id)
+    fun getNoteById(id: Int): Flow<Note?> {
+        return noteDao.getNoteById(id)
+    }
 
     fun getNotes(): Flow<List<Note>> = noteDao.getAllNotes()
 }

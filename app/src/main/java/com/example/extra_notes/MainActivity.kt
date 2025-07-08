@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.extra_notes.presentation.notes.ui.MainScreen
+import com.example.extra_notes.presentation.notes.ui.NotesApp
 import com.example.extra_notes.presentation.notes.ui.theme.Extra_NotesTheme
 import com.example.extra_notes.presentation.notes.viewmodel.NoteViewModel
 
@@ -33,7 +34,7 @@ class MainActivity : ComponentActivity() {
                         "NoteViewModel",
                         NoteViewModelFactory(LocalContext.current.applicationContext as Application)
                     )
-                    MainScreen(viewModel)
+                    NotesApp(viewModel)
                 }
             }
         }
