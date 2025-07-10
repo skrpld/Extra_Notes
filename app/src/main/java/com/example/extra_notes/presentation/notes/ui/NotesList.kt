@@ -15,10 +15,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.extra_notes.presentation.notes.viewmodel.NoteViewModel
 
 @Composable
-fun NotesList(noteVM: NoteViewModel = viewModel()) {
+fun NotesList(navController: NavController, noteVM: NoteViewModel = viewModel()) {
     val noteList by noteVM.noteList.collectAsStateWithLifecycle()
 
     if (noteList.isEmpty()) {
@@ -37,7 +38,7 @@ fun NotesList(noteVM: NoteViewModel = viewModel()) {
     } else {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(noteList) { note ->
-                NoteItem(note = note)
+                NoteItem(note = note, navController)
             }
         }
     }

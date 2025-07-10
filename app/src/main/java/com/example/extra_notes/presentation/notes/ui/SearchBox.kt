@@ -24,6 +24,7 @@ fun SearchBox() {
         modifier = Modifier
             .fillMaxWidth()
             .height(70.dp)
+            .padding(bottom = 8.dp, start = 8.dp, end = 8.dp)
             .background(Color.Transparent, MaterialTheme.shapes.extraLarge)
             .border(3.dp, Color.LightGray, MaterialTheme.shapes.extraLarge),
         verticalAlignment = Alignment.CenterVertically

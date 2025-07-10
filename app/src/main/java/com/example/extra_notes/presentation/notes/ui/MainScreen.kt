@@ -16,11 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavController
 import com.example.extra_notes.presentation.notes.viewmodel.NoteViewModel
 
 @Composable
-fun MainScreen(noteVM: NoteViewModel = viewModel()) {
+fun MainScreen(navController: NavController, noteVM: NoteViewModel = viewModel()) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -28,10 +28,10 @@ fun MainScreen(noteVM: NoteViewModel = viewModel()) {
     ) {
         SearchBox()
 
-        NotesList()
+        NotesList(navController, noteVM)
 
         FloatingActionButton(
-            onClick = { showDialog },
+            onClick = { navController.navigate("NoteEditor") },
             modifier = Modifier
                 .size(90.dp)
                 .background(Color.Transparent, MaterialTheme.shapes.extraLarge)

@@ -1,6 +1,7 @@
 package com.example.extra_notes.presentation.notes.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,12 +24,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.extra_notes.data.local.db.Note
 import com.example.extra_notes.presentation.notes.viewmodel.NoteViewModel
 
 @Composable
 fun NoteItem(
     note: Note,
+    navController: NavController,
     noteVM: NoteViewModel = viewModel()
 ) {
     Row(
@@ -52,6 +55,7 @@ fun NoteItem(
 
         Column(
             modifier = Modifier
+                .clickable { navController.navigate("NoteEditor/${note.id}") }
                 .weight(1F)
                 .fillMaxHeight()
                 .padding(top = 10.dp, bottom = 10.dp),
