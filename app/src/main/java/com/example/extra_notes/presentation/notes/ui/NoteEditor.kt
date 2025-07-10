@@ -17,6 +17,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -46,6 +47,20 @@ fun NoteEditor(
     var title by remember { mutableStateOf(note?.title ?: "") }
     var content by remember { mutableStateOf(note?.content ?: "") }
     var isPinned by remember { mutableStateOf(note?.isPinned ?: false) }
+
+    LaunchedEffect(note) {
+        note?.let { currentNote ->
+            title = currentNote.title
+            content = currentNote.content
+            isPinned = currentNote.isPinned
+        }
+    }
+
+    if (id == 0 && note == null) {
+        title = ""
+        content = ""
+        isPinned = false
+    }
 
     Column(
         modifier = Modifier
@@ -100,7 +115,11 @@ fun NoteEditor(
             Button(
                 onClick = {
                     if (title.isNotBlank()) {
-                        noteVM.addNote(title, content, isPinned)
+                        if (id != 0) {
+                            noteVM.updateNote(Note(id, title, content, isPinned))
+                        } else {
+                            noteVM.addNote(title, content, isPinned)
+                        }
                         navController.popBackStack()
                     }
                 },
