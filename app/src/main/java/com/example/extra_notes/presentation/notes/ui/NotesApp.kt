@@ -16,10 +16,16 @@ fun NotesApp(noteVM: NoteViewModel = viewModel()) {
     NavHost(navController, startDestination = "MainScreen") {
         composable("MainScreen") { MainScreen(navController) }
         composable(
-            "NoteEditor" + "/{id}",
-            arguments = listOf(navArgument("id") { type = NavType.IntType })
+            route = "NoteEditor?id={id}",
+            arguments = listOf(
+                navArgument("id") {
+                    type = NavType.IntType
+                    defaultValue = 0
+                }
+            )
         ) { stackEntry ->
-            NoteEditor(stackEntry.arguments?.getInt("id") ?: 0, navController)
+            val noteId = stackEntry.arguments?.getInt("id") ?: 0
+            NoteEditor(noteId, navController)
         }
     }
 }
