@@ -35,7 +35,7 @@ fun MainScreen(navController: NavController, noteVM: NoteViewModel = viewModel()
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            SearchBox()
+            SearchBox(noteVM)
 
             NotesList(navController, noteVM)
         }

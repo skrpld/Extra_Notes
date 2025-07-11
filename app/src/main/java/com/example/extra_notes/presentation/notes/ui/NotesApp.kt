@@ -24,8 +24,8 @@ fun NotesApp(noteVM: NoteViewModel = viewModel()) {
                 }
             )
         ) { stackEntry ->
-            val noteId = stackEntry.arguments?.getInt("id") ?: 0
-            NoteEditor(noteId, navController)
+            val id = stackEntry.arguments?.getInt("id") ?: 0
+            NoteEditor(id, navController)
         }
     }
 }

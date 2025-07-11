@@ -55,7 +55,7 @@ fun NoteItem(
 
         Column(
             modifier = Modifier
-                .clickable { navController.navigate("NoteEditor/${note.id}") }
+                .clickable { navController.navigate("NoteEditor?id=${note.id}") }
                 .weight(1F)
                 .fillMaxHeight()
                 .padding(top = 10.dp, bottom = 10.dp),

@@ -22,6 +22,6 @@ interface NoteDao {
     @Query("SELECT * FROM notes_database WHERE id = :id")
     fun getNoteById(id: Int): Flow<Note?>
 
-    @Query("SELECT * FROM notes_database ORDER BY isPinned DESC, id DESC")
-    fun getAllNotes(): Flow<List<Note>>
+    @Query("SELECT * FROM notes_database WHERE title LIKE '%' || :searchQuery || '%' OR content LIKE '%' || :searchQuery || '%'")
+    fun getAllNotes(searchQuery: String): Flow<List<Note>>
 }

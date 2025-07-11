@@ -1,5 +1,7 @@
 package com.example.extra_notes.data.repository
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import com.example.extra_notes.data.local.db.Note
 import com.example.extra_notes.data.local.db.NoteDao
 import kotlinx.coroutines.CoroutineScope
@@ -10,8 +12,13 @@ import kotlinx.coroutines.launch
 class NoteRepository(
     private val noteDao: NoteDao
 ) {
-    val noteList: Flow<List<Note>> = noteDao.getAllNotes()
+    val coincidence by mutableStateOf("")
+    val noteList: Flow<List<Note>> = noteDao.getAllNotes(coincidence)
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
+
+    fun getNotes(searchQuery: String): Flow<List<Note>> {
+        return noteDao.getAllNotes(searchQuery)
+    }
 
     suspend fun addNote(note: Note) {
             noteDao.insert(note)
@@ -31,6 +38,4 @@ class NoteRepository(
     fun getNoteById(id: Int): Flow<Note?> {
         return noteDao.getNoteById(id)
     }
-
-    fun getNotes(): Flow<List<Note>> = noteDao.getAllNotes()
 }
